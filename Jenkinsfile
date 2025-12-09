@@ -40,7 +40,7 @@ pipeline {
                     retry(12) {   // 12 tries × 10 sec = 2 min
                         sleep 10
                         sh '''
-                        export KUBECONFIG=/home/vboxuser/kubeconfig
+                        export KUBECONFIG=/var/lib/jenkins/workspace/rke2-ansible-pipeline/kubeconfig
                         READY_COUNT=$(kubectl get nodes --no-headers | grep -c " Ready")
                         if [ "$READY_COUNT" -lt 2 ]; then
                             echo "Nodes not ready yet..."
@@ -55,7 +55,7 @@ pipeline {
         stage('Show Final Cluster Status') {
             steps {
                 sh '''
-                export KUBECONFIG=/home/vboxuser/kubeconfig
+                export KUBECONFIG=/var/lib/jenkins/workspace/rke2-ansible-pipeline/kubeconfig
                 echo "🎉 FINAL CLUSTER STATUS:"
                 kubectl get nodes -o wide
                 '''
