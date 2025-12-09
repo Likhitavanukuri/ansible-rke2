@@ -43,6 +43,7 @@
       command: cat /var/lib/rancher/rke2/server/token
       register: token_output
 
+    # ✅ CRITICAL FIX → This runs on Jenkins as normal user (no sudo)
     - name: Save token to Jenkins workspace
       delegate_to: localhost
       become: false
