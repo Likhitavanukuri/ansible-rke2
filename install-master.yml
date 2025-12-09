@@ -24,7 +24,7 @@
           node-ip: "192.168.56.101"
           tls-san:
             - "192.168.56.101"
-      mode: '0644'
+        mode: '0644'
 
     - name: Install RKE2 server
       shell: INSTALL_RKE2_TYPE=server sh /tmp/rke2-install.sh
@@ -43,12 +43,11 @@
       command: cat /var/lib/rancher/rke2/server/token
       register: token_output
 
-    # IMPORTANT: Save token to Jenkins workspace (NO sudo required)
     - name: Save token to Jenkins workspace
-      local_action:
-        module: copy
-        content="{{ token_output.stdout }}"
-        dest="/var/lib/jenkins/workspace/rke2-ansible-pipeline/cluster-token.txt"
+      delegate_to: localhost
+      copy:
+        content: "{{ token_output.stdout }}"
+        dest: "/var/lib/jenkins/workspace/rke2-ansible-pipeline/cluster-token.txt"
 
     - name: Copy kubeconfig to user directory
       copy:

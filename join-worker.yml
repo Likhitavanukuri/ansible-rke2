@@ -5,7 +5,7 @@
 
   vars:
     master_ip: "192.168.56.101"
-    token: "{{ lookup('file', './cluster-token.txt') }}"
+    token: "{{ lookup('file', '/var/lib/jenkins/workspace/rke2-ansible-pipeline/cluster-token.txt') }}"
 
   tasks:
 
