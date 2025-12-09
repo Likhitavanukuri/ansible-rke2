@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
-        KUBECONFIG = "/home/vboxuser/kubeconfig"
+        KUBECONFIG = "/var/lib/jenkins/kubeconfig"
     }
 
     stages {
